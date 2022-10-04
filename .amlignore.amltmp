@@ -4,3 +4,5 @@
 .ipynb_aml_checkpoints/ 
 *.amltmp 
 *.amltemp
+*.ipynb_aml_checkpoints/
+.amlignore.amltmp

@@ -12,7 +12,7 @@ the first one is to save a copy of your input dataset:
         mlflow.log_artifacts(tmp)
 
 This works only in case the dataset is small (DevOps packages are limited to 500 MB per file.)       
-In case the dataset is larger datasets parameters can be tracked: 
+In case the dataset is larger,here are few ideas to track some dataset parameters:  
 
     mlflow.log_param('dsPathМ', file_url )   #track the pointer to the data
     mlflow.log_param('FileName', FName)  #track the source FileName

@@ -24,4 +24,3 @@ An example can be found in the notebook: [tracking_datasets_with_mlflow.ipynb](t
 In Azure ML you can find the tracked data in the 'Job Overview' window:  
 
 ![tracking_datasets_with_mlflow](saveDatasetVer/trckD.png)
-

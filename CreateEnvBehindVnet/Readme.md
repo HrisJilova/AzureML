@@ -3,16 +3,16 @@
 1. Create a folder for you docker context 'DockerContext'
 2. In 'DockerContext' folder create a requirements.txt file that contains your  packages:  
 ```
-     ``  openpyxl==3.0.10  ``  
-      ``  pyod==1.0.4  ``  
-     ``   kaleido==0.2.1  ``  
-      ``  plotly==5.10.0  ``  
-      ``  pandas==1.1.5  ``  
-     ``   numpy==1.21.6  ``  
-     ``   seaborn==0.11.2  ``  
-      ``  pathlib2==2.3.7.post1  ``  
-      ``  matplotlib==3.2.1  ``  
-       `` argparse  ``  
+       openpyxl==3.0.10   
+        pyod==1.0.4    
+        kaleido==0.2.1  
+        plotly==5.10.0    
+        pandas==1.1.5    
+        numpy==1.21.6    
+        seaborn==0.11.2    
+        pathlib2==2.3.7.post1    
+        matplotlib==3.2.1    
+        argparse    
 ```
 It’s a good practice to fix the versions. You can find the version with command: ``pip freeze | grep 'the package name' ``  
 

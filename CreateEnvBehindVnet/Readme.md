@@ -48,6 +48,6 @@ You will find the username (it's your-acr-name) and the password in the Access k
 
     ``docker push your-acr-name.azurecr.io/repo/mynewenv:v1
 ``  
-8.	Point your component environment to the new image:   
+8.	Point your job/component environment to the new image:   
 ``   image: your-acr-name.azurecr.io/repo/ mynewenv:v1
     ``  

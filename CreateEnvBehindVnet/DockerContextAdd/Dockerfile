@@ -1,4 +1,4 @@
-FROM crhjilova.azurecr.io/repo/customimagename:v1
+FROM your-acr-name.azurecr.io/repo/customimagename:v1
 
 # python installs
 COPY requirements.txt .

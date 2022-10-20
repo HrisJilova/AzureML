@@ -1,4 +1,4 @@
-## How to build and environment when your Azure ML workspace is behind a VNet
+## How to build an environment when your Azure ML workspace is behind a VNet
 
 1. Create a folder for you docker context called 'DockerContext'
 2. In 'DockerContext' folder create a 'requirements.txt' file that contains your  packages:  

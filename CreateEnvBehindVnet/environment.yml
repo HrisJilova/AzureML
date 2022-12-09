@@ -1,4 +1,4 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
-name: my-environment
+name: mynewenv
 build:
   path: DockerContext

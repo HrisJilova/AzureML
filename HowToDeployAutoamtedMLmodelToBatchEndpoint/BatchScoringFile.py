@@ -15,7 +15,7 @@ def init():
     # Please provide your model's folder name if there's one:
     #model_path = os.path.join(os.environ["AZUREML_MODEL_DIR"], model_path1)
     model_path = os.path.join(os.getenv("AZUREML_MODEL_DIR", default=""),
-                              "model.pkl")
+                              "outputs/model.pkl")
     print(model_path)
     output_path = os.environ['AZUREML_BI_OUTPUT_PATH']
     #model = mlflow.pyfunc.load_model(model_path)

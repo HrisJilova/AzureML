@@ -2,7 +2,7 @@
 
 Suppose you’ve trained a Automated machine learning classification model to accomplish some task, and now you want to use this model as a service for inference. Maybe you don't need to run this model in a real time, but only a few times a week or even less frequently. The perfect solution for you could be to deploy your model on a batch endpoint. 
 
-Unfortunately, Azure Automated ML dose not support batch endpoints. There is a known limitation that the scoring script that Automated ML only works for Online Endpoints.
+Unfortunately, Azure Automated ML dose not support batch endpoints. There is a known limitation that the scoring script that Automated ML creates only works for Online Endpoints.
 To overcome this limitation, you need to create your own scoring script that specifies how your model should run and how your input data should be processed. (for reference: how to author the scoring script:
 https://learn.microsoft.com/en-us/azure/machine-learning/how-to-batch-scoring-script)  
 

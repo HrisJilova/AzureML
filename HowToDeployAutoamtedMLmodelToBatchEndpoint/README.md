@@ -1,37 +1,21 @@
 # How to deploy a classification Automated ML model on a batch endpoint  
 
-Suppose you’ve trained a automated machine learning classification model to accomplish some task, and you’d now like to provide that model’s inference capabilities as a service. Maybe you want to run this model only few times a week or even less frequently. 
+Suppose you’ve trained a Automated machine learning classification model to accomplish some task, and now you want to use this model as a service for inference. Maybe you don't need to run this model in a real time, but only a few times a week or even less frequently. The perfect solution for you could be to deploy your model on a batch endpoint. 
 
-The perfect solution for you could be to deploy your model on a batch endpoint. 
-
-Azure Automated ML still dose not supports batch endpoints. There is a known limitation that the scoring script that Automated ML provides only works for Online Endpoints.
- To overcome this limitation, you need to create your own scoring script that specifies how your model should run and how your input data should be processed. (for reference: how to author the scoring script:
+Unfortunately, Azure Automated ML dose not support batch endpoints. There is a known limitation that the scoring script that Automated ML only works for Online Endpoints.
+To overcome this limitation, you need to create your own scoring script that specifies how your model should run and how your input data should be processed. (for reference: how to author the scoring script:
 https://learn.microsoft.com/en-us/azure/machine-learning/how-to-batch-scoring-script)  
 
-In this example, you will learn how using only the UI to deploy your model on a Batch endpoint and run your predictions. 
+In this example, you will learn how using only the UI to deploy your model on a Batch endpoint and run your predictions using a scoring script from azure ml examples. 
 
+1. Run Automated ML and select the best model. n this case I'll choose the first one: **'VotingEnsemble'** 
 
+![AutomatedMLmodels](Images/AutomatedML1.png)  
 
-1. Run Automated ML and select the best model (the model you want): 
-
-![AutomatedMLmodels](Images/AutomatedML1.png)   
-  
-
-
-In this case I'll choose the first one: **'VotingEnsemble'**    
-  
-
-    
-
-2. Click over the name of selected model and open the Overview page. Click over 'Register Model'    
-
+2. Click over the name of selected model and open the Overview page. Click over 'Register Model' 
 ![OverviewModel](Images/OverviewModel.png)   
 
-
-  
-
 3. In the 'Model Type' field select 'Unspecified type' and in 'Job outputs' select the folder that contains the **'model.pkl'** file, 'outputs' in this case.   
-
 
 ![ModelFolder](Images/ModelFolder.png)  
 
@@ -45,9 +29,7 @@ In this case I'll choose the first one: **'VotingEnsemble'**
     Go back to Jobs and the model you selected **'VotingEnsemble'**.   
     Select the **'Overview'** tab  and click on **'Environment'**: 'AzureML-AutoML' in this case.   
       
-
 ![Environment](Images/Environment.png)    
-
 
 Copy the Parent image and 'Conda' definition in a txt file:  
     Parent image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:20230120.v1  

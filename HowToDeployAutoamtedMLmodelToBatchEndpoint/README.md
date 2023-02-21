@@ -34,8 +34,8 @@ In this case I'll choose the first one: **'VotingEnsemble'**
     For Output action select **'Summary only'**  
     You can keep the rest of the settings as they are and click Next
     Select scoring file and dependencies: Click on Browse and upload the **BatchScoringFile.py** file. 
-    Select the Environment that you created: **'MybatchJobEnv'** Note: If you cannot see your env. look at the filters and remove them if any. 
-![Environment](Images/EnvironmentDep.png)
+    Select the Environment that you created: **'MybatchJobEnv'** Note: If you cannot see your env. look at the filters and remove them if any.   
+    ![Environment](Images/EnvironmentDep.png)
     Select a compute cluster for yur job and complete the wizard. 
     If the process fails, go back to endpoints and **'Endpoints'** and select **'Batch endpoints'** , find **'mybatchendpoint'** and click on **'Add Deployment'** , follow the steps above again. 
 
@@ -44,11 +44,15 @@ for this goal, register a new data asset, that contains your input data:
     go to **'Data'** => **'Data Assets'** => **'Create'** 
     give a name for your data asset: **'myDataForScoring'** (its should have the same structure as your training data but without the prediction column). You should create  SDKv2 dataset from type uri_file or uri_folder ([SDKv1 datasets and mltable are not supported](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-troubleshoot-batch-endpoints#limitations-and-not-supported-scenarios) )
     ![Environment](Images/DataAsset.png)
-    My data is located on my hard drive and I'll select From Local files to upload it. Then Click Next and in 'Choose a file' click Upload file : **'MyDataForScoring.csv'** . Click Next and Create
+    My data is located on my hard drive and I'll select From Local files to upload it. Then Click Next and in 'Choose a file' click Upload file : **'MyDataForScoring.csv'** . Click Next and **'Create'** 
+
+ Go to **'Endpoints'** and select **'Batch endpoints'**  and click over **'MyBatchEndpoint'** then click on **'Jobs'** and **'Create job'**. 
+    Select  **'mydeployment1'** then Next and select your Data asset: **'myDataForScoring'**. On the next screen select **'Enable output configuration'**. I'll select my default Blob datastore **'workspaceblobstore'** and will add the name of the folder I want to have my predictions. Click on Create: 
+     ![OutputSettings](Images/Output.png)
 
 
-
-
+A job is submitted and running: 
+ ![RunningJob](Images/Job.png)
 
 
 

@@ -1,11 +1,11 @@
 # How to deploy a classification Automated ML model on a batch endpoint  
 
-Suppose you’ve trained an Automated machine learning classification model to accomplish some task, and now you want to use this model as a service for inference. Maybe you don't need to run this model in real time, but only a few times a week or even less frequently. The perfect solution for you could be to deploy your model on a batch endpoint.  
+Suppose you’ve trained an Automated machine learning classification model to accomplish some tasks, and now you want to use this model as a service for inference. Maybe you don't need to run this model in real time, but only a few times a week or even less frequently. The perfect solution for you could be to deploy your model on a batch endpoint.  
 
 Unfortunately, Azure Automated ML does not support batch endpoints. There is a known limitation that the scoring script that Automated ML creates only works for Online Endpoints. To overcome this limitation, you need to create your own [scoring script](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-batch-scoring-script) that specifies how your model should run and how your input data should be processed. 
 
 In this example, you will learn how using only UI to deploy your classification*  model on a Batch endpoint and run your predictions using a scoring script from azure ml examples.  
-* You can applay the same approach for regression model  
+* You can apply the same approach for regression model  
 * For automl-forcasting models deployment to a batch endpoint, please look at [Azure ML official code repository](https://github.com/Azure/azureml-examples/tree/main/sdk/python/jobs/automl-standalone-jobs)
 
 1. Run Automated ML and select the best model. In this case I'll choose the first one: **'VotingEnsemble'** 
@@ -26,16 +26,16 @@ Go to 'Models' and check that your model is in the Model list.
 ![ModelList](Images/ModelList.png)  
 
   
-Check the location of your model: Click on the model name and open in and select 'Artifacts'. Check if the file 'model.pkl' is in the main folder. This is important and we will use it in our  scoring script in the next steps. 
+Check the location of your model: Click on the model's name and open it in and select 'Artifacts'. Check if the file 'model.pkl' is in the main folder. This is important and we will use it in our  scoring script in the next steps. 
 
 
 The **'model.pkl'** file is in the main folder:
 ![model.pkl](Images/modelArtifacts1.jpg)    
 
-The **'model.pkl** file is in under **'outputs'** folder:
+The **'model.pkl** file is in **'outputs'** folder:
 ![model.pkl](Images/modelArtifacts2.jpg) 
 
-3. Create and **Environment** for your job:  
+1. Create and **Environment** for your job:  
  Go back to Jobs and the model you selected **'VotingEnsemble'**.   
  Select the **'Overview'** tab  and click on **'Environment'**: 'AzureML-AutoML' in this case.   
       
@@ -58,7 +58,7 @@ Follow the wizard and finally click 'Create'.
 4. [Create a **Batch endpoint**](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-use-batch-endpoint?tabs=azure-studio) using UI:  
     
 Download the [scoring script](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-batch-scoring-script) from this repo - file: **BatchScoringFile.py**  You need this scoring script to load the data and make the predictions. The [output](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-model-custom-output?tabs=cli) in this case is defined to be csv file. 
-Please note that you may need to change the 'model_path' in the **BatchScoringFile.py** code depending where your 'model.pkl' file is located. The method 'pd.read_csv' by default uses comma delimiter, so if your csv file is using different type of delimiter, you should specify it.  
+Please note that you may need to change the 'model_path' in the [**BatchScoringFile.py**](BatchScoringFile.py) code depending on where your 'model.pkl' file is located. The method 'pd.read_csv' by default uses comma delimiter, so if your csv file is using different type of delimiter, you should specify it.  
 
 
 Go to **'Endpoints'** and select **'Batch endpoints'** and click on **Create'**. Give a name to your endpoint: **'MyBatchEndpoint'** (Note that the name should b region specific). Select the model that you just registered: **MyAutomatedMLModel**. Give a name for your deployment: **'mydeployment1'**. In Output action select **'Summary only'**  
@@ -78,7 +78,7 @@ Give a name for your data asset: **'myDataForScoring'** (the source file should 
 ![Environment](Images/DataAsset.png)
   
 Click 'Next' and in 'Choose a file' click Upload file : **'MyDataForScoring.csv'** .
-(My data is located on my hard drive and I'll select From Local files to upload it). 
+(My data is located on my hard drive, and I'll select From Local files to upload it). 
 Click 'Next' and 'Create'.  
 
 Go to **'Endpoints'** and select **'Batch endpoints'**  and click over **'MyBatchEndpoint'**. Then click on **'Jobs'** and **'Create job'**. 

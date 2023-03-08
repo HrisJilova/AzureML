@@ -24,31 +24,40 @@ In this example, you will learn how using only UI to deploy your model on a Batc
 
 ![ModelList](Images/ModelList.png)  
 
-6. Create and **Environment** for your job:  
+  
+6. Check the location of your model: Click on the model name and open in and select 'Artifacts'. Check if the file 'model.pkl' is in the main folder. This is important and we will use it in our  scoring script in the next steps. 
+
+
+The **'model.pkl'** fie is in the main folder:
+![model.pkl](Images/modelArtifacts1.jpg)    
+
+The **'model.pkl** fie is in under 'outputs' folder:
+![model.pkl](Images/modelArtifacts2.jpg) 
+
+1. Create and **Environment** for your job:  
     Go back to Jobs and the model you selected **'VotingEnsemble'**.   
     Select the **'Overview'** tab  and click on **'Environment'**: 'AzureML-AutoML' in this case.   
       
 ![Environment](Images/Environment.png)    
 
-Copy the Parent image and 'Conda' definition in a txt file:  
-    Parent image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:20230120.v1  
+Copy Azure container registry: mcr.microsoft.com/azureml/curated/azureml-automl:133 
 
-![Environment](Images/Environment2.png)  
+![Environment](Images/EnvironmentN.png)  
 
 Go to **'Environments'** and  **'Custom Environments'**, select **'Create'**  
 Give a name to your Environment: **'MybatchJobEnv'**  
-In Select Environment type choose **'Use existing docker image with optional conda file'**  and in the **'Container registry image path'** paste the Parent image that you copy in the txt file. 
+In Select Environment type choose **'Use existing docker image with optional conda file'**  and in the **'Container registry image path'** paste the Copy Azure container registry address from the previous step. 
 
-![Environment](Images/Environment3.png)  
-
-Click next and in paste in the conda.yml the Conda definition you copied in the txt file.  
+Deselect the 'conda.yml'  and click 'Next' 
 
 ![Environment](Images/Environment4.png)  
 
-Follow the wizard and finally click 'Create'. Your Environment will start to build the image.     
+Follow the wizard and finally click 'Create'. 
 
 1. Create a Batch endpoint UI: 
-Download the scoring script from the repo - file: **BatchScoringFile.py**  You need this scoring script to load the data and make predictions. The output in this case is defined to be csv file.   
+Download the scoring script from the repo - file: **BatchScoringFile.py**  You need this scoring script to load the data and make predictions. The output in this case is defined to be csv file. 
+Please note that you may need to change the 'model_path' in the **BatchScoringFile.py** code depending where your model is located (pleas look at the step '6. Check the location of your model'). The method 'pd.read_csv' by default uses comma delimiter, so if your csv file is using different type of delimiter, you should specify it. 
+
 
 Go to **'Endpoints'** and select **'Batch endpoints'** and click on **Create'**. Give a name to your endpoint: **'MyBatchEndpoint'**. Select the model that you just registered: **MyAutomatedMLModel**. Give a name for your deployment: **'mydeployment1'**. In Output action select **'Summary only'**  
 You can keep the rest of the settings as they are and click 'Next'.

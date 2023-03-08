@@ -28,13 +28,13 @@ In this example, you will learn how using only UI to deploy your model on a Batc
 6. Check the location of your model: Click on the model name and open in and select 'Artifacts'. Check if the file 'model.pkl' is in the main folder. This is important and we will use it in our  scoring script in the next steps. 
 
 
-The **'model.pkl'** fie is in the main folder:
+The **'model.pkl'** file is in the main folder:
 ![model.pkl](Images/modelArtifacts1.jpg)    
 
-The **'model.pkl** fie is in under 'outputs' folder:
+The **'model.pkl** file is in under **'outputs'** folder:
 ![model.pkl](Images/modelArtifacts2.jpg) 
 
-1. Create and **Environment** for your job:  
+7. Create and **Environment** for your job:  
     Go back to Jobs and the model you selected **'VotingEnsemble'**.   
     Select the **'Overview'** tab  and click on **'Environment'**: 'AzureML-AutoML' in this case.   
       
@@ -54,12 +54,13 @@ Deselect the 'conda.yml'  and click 'Next'
 
 Follow the wizard and finally click 'Create'. 
 
-1. Create a Batch endpoint UI: 
-Download the scoring script from the repo - file: **BatchScoringFile.py**  You need this scoring script to load the data and make predictions. The output in this case is defined to be csv file. 
-Please note that you may need to change the 'model_path' in the **BatchScoringFile.py** code depending where your model is located (pleas look at the step '6. Check the location of your model'). The method 'pd.read_csv' by default uses comma delimiter, so if your csv file is using different type of delimiter, you should specify it. 
+8. [Create a **Batch endpoint**](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-use-batch-endpoint?tabs=azure-studio) using UI:  
+    
+Download the [scoring script](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-batch-scoring-script) from this repo - file: **BatchScoringFile.py**  You need this scoring script to load the data and make the predictions. The [output](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-model-custom-output?tabs=cli) in this case is defined to be csv file. 
+Please note that you may need to change the 'model_path' in the **BatchScoringFile.py** code depending where your 'model.pkl' file is located (pleas look at the step '6. Check the location of your model'). The method 'pd.read_csv' by default uses comma delimiter, so if your csv file is using different type of delimiter, you should specify it.  
 
 
-Go to **'Endpoints'** and select **'Batch endpoints'** and click on **Create'**. Give a name to your endpoint: **'MyBatchEndpoint'**. Select the model that you just registered: **MyAutomatedMLModel**. Give a name for your deployment: **'mydeployment1'**. In Output action select **'Summary only'**  
+Go to **'Endpoints'** and select **'Batch endpoints'** and click on **Create'**. Give a name to your endpoint: **'MyBatchEndpoint'** (Note that the name should b region specific). Select the model that you just registered: **MyAutomatedMLModel**. Give a name for your deployment: **'mydeployment1'**. In Output action select **'Summary only'**  
 You can keep the rest of the settings as they are and click 'Next'.
 Select scoring file and dependencies: Click on Browse and upload the **BatchScoringFile.py** file. 
 Select the Environment that you created: **'MybatchJobEnv'** (Note: If you cannot see your environment look at the filters and remove them if any)    
@@ -69,7 +70,7 @@ Select the Environment that you created: **'MybatchJobEnv'** (Note: If you canno
 Select a compute cluster for your job and complete the wizard.  
 Note: In case the process fails, go back to endpoints, select **'Batch endpoints'** , find **'mybatchendpoint'** and click on **'Add Deployment'** , follow the steps above again. 
 
-8. Create a prediction Job: to make predictions, you need to create a prediction job. This requires registering a new data asset that points your input data:   
+9. [Create a prediction Job](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-access-data-batch-endpoints-jobs?tabs=cli): to make predictions, you need to create a prediction job. This requires registering a new data asset that points your input data:   
 Go to **'Data'** and **'Data Assets'**, click on 'Create'  
 Give a name for your data asset: **'myDataForScoring'** (the source file should have the same structure as your training data, but without the prediction column). You need to create  SDKv2 dataset from type uri_file or uri_folder ([SDKv1 datasets and mltable are not supported](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-troubleshoot-batch-endpoints#limitations-and-not-supported-scenarios) ).  
 
@@ -100,6 +101,4 @@ Go to your Blob Storage and navigate to the related Directory:
   
 
 ![Results in the Blob Storage](Images/Results2.png)     
-
-
 
